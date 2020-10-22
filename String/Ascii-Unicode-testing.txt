@@ -1,0 +1,35 @@
+ # Comment symbol '#' ignore the line
+ # Get-Content - Only read "unstructured" file [text,word]..
+ # '$' Variable symbol to decclare variable
+
+ $unicode = Get-Content .\unicode.txt
+ $unicode
+
+ $Ascii = Get-Content .\Ascii.txt
+ $Ascii
+
+ # Visually both Variable holds the same data
+ # lets try to compare both are same
+ $unicode -eq $Ascii
+
+ # The comparison Operator '-eq' always return 'TRUE' or 'FALSE'
+ Compare-Object  $unicode $Ascii
+
+ # cmdlet 'Compare-object; return always Value which is not identical on the objects
+ # Powershell is unicode 16bit char '2byte' [symbols 0-256] which is from .NET where ASCII is '1byte' limited char [symbols 0-127] available
+ # lets try reading through symbols why its not same. letters[A,B..],symbols[+,-..] everything treated as symbols when it comes to encoding.
+
+
+  ([System.Text.Encoding]::ASCII.GetBytes($unicode) |foreach{[char]$_}) -join ''
+
+ ([System.Text.Encoding]::ASCII.GetBytes($Ascii) |foreach{[char]$_}) -join ''
+
+ #Now you see the difference of objects. this is becauase of '?' represent non existed symbols in ASCII(160).
+ #ASCIIsupport 0-127 only when you read through ASCII non existed symbols placed '?' here 160 not existed
+ # 160 is non page break symbol in unicode only hence you read through unicode. its just fine.^C
+ # Ascii is 7bits 8th bitnot used. unicode used 8th bit to support more symbols [1byte]
+ # Unicode uses Ascii 127 bit then 8th bit for other symbols
+ # its OS & application responsibilty to organize and process data .
+ # Some application support only ascii. .NET java and more on windows already 16bits more symbols[lanugage] support
+ # Symbols are picked up temp/perm storage to memory with 0s and 1s for processing as it know on/off.[binary]
+ # Here Symbols 'w''e' are represented as 87,101 which is moved to memory as '1010111' '1101011' and to CPU for processing.
