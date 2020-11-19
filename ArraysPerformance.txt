@@ -1,0 +1,37 @@
+Method 1: Basic
+#code starts
+$report = @()
+$Array = Get-service # array Initialization
+Measure-Command {foreach($item in $Array)
+{
+$report += $item.name
+}
+} | select Milliseconds
+
+
+Method 2: Better
+$report = New-Object System.Collections.ArrayList
+$Array = Get-service # array Initialization
+Measure-Command  {
+#code starts
+$report = foreach($item in $Array)
+{
+$report.add($item.name)
+}
+#code Ends
+} | select Milliseconds
+
+
+
+Method 3: Best
+
+$Array = Get-service # array Initialization
+Measure-Command  {
+#code starts
+$report = foreach($item in $Array)
+{
+$item.name
+}
+#code Ends
+} | select Milliseconds
+
