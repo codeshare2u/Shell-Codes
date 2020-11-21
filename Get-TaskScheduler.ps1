@@ -3,7 +3,7 @@
 	===========================================================================
 	 Created on:   	9/23/2020 
 	 Created by:   	Abdul Malik
-	 Organization: 	NCS
+	 Organization: 	
 	 Filename:     	Get-TaskScheduler
 	===========================================================================
 	.DESCRIPTION
