@@ -8,17 +8,23 @@
 	===========================================================================
 	.DESCRIPTION
 		Find inactive objects in AD
-    .Synopsis
+    	.Synopsis
          Scan thorugh AD to find inactive objects with date option
 	.EXAMPLE
-     Get-InactiveObjects -item computers -date 90
-    .EXAMPLE
-     Get-InactiveObjects -item Users -date 90
-    .EXAMPLE
-     Get-InactiveObjects -item DNS
+    	 Get-InactiveObjects -item computers -date 90
+   	.EXAMPLE
+    	 Get-InactiveObjects -item Users -date 90
+   	.EXAMPLE
+    	 Get-InactiveObjects -item DNS
 	.EXAMPLE
-     Get-InactiveObjects -item all
-    # Default date will be 90 days for computers and users
+    	 Get-InactiveObjects -item Ous
+	.EXAMPLE
+    	 Get-InactiveObjects -item Groups
+	.EXAMPLE
+    	 Get-InactiveObjects -item Gpos
+	.EXAMPLE
+   	 Get-InactiveObjects -item all
+   	 # Default date will be 90 days for computers and users
 #>
 
 Function Get-InactiveObjects
